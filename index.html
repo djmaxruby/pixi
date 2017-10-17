@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script language="JavaScript" src="/node_modules/pixi.js/dist/pixi.js"></script>
+    <title>Title</title>
+
+
+</head>
+<body>
+</body>
+</html>
+
+<script language="JavaScript">
+    var app;
+
+    var view = {
+        start: function(){
+            model.createCanvas();
+            model.drawButton();
+        }
+    };
+
+    var model = {
+        createCanvas: function() {
+            app = new PIXI.Application(800, 600);
+            document.body.appendChild(app.view);
+        },
+        drawButton: function () {
+            var object = new PIXI.Graphics();
+            object.beginFill(0xFF0000,1);
+            object.drawRect(100,100,400,300);
+            object.endFill();
+            object.buttonMode = true;
+            object.interactive = true;
+            app.stage.addChild(object);
+            object.on('pointerdown', controller.onDown);
+            object.on('pointerup', controller.restore);
+            object.on('pointerover', controller.onOver);
+            object.on('pointerout', controller.restore);
+        }
+    };
+
+    var controller = {
+        onDown: function () {
+            this.beginFill(0x0000FF);
+            this.drawRect(100,100,400,300);
+            this.endFill();
+        },
+        restore: function (e) {
+            console.log(e);
+            this.beginFill(0xFF0000);
+            this.drawRect(100,100,400,300);
+            this.endFill();
+        },
+        onOver: function () {
+            this.beginFill(0x00FF00);
+            this.drawRect(100,100,400,300);
+            this.endFill();
+        }
+    };
+
+    view.start();
+</script>
