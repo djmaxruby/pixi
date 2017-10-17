@@ -35,20 +35,25 @@
             object.interactive = true;
             app.stage.addChild(object);
             object.on('pointerdown', controller.onDown);
-            object.on('pointerup', controller.restore);
+            object.on('pointerup', controller.onUp);
             object.on('pointerover', controller.onOver);
-            object.on('pointerout', controller.restore);
+            object.on('pointerout', controller.onOut);
         }
     };
 
     var controller = {
+
         onDown: function () {
             this.beginFill(0x0000FF);
             this.drawRect(100,100,400,300);
             this.endFill();
         },
-        restore: function (e) {
-            console.log(e);
+        onUp: function () {
+            this.beginFill(0x00FF00);
+            this.drawRect(100,100,400,300);
+            this.endFill();
+        },
+        onOut: function () {
             this.beginFill(0xFF0000);
             this.drawRect(100,100,400,300);
             this.endFill();
