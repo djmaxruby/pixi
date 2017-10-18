@@ -1,8 +1,15 @@
+import Controller from "./controller";
+
+let controller = new Controller();
+
 export default class Model {
 
+    constructor() {
+        this.app = new PIXI.Application(800, 600);
+    }
+
     createCanvas() {
-        app = new PIXI.Application(800, 600);
-        document.body.appendChild(app.view);
+        document.body.appendChild(this.app.view);
     }
 
     drawButton() {
@@ -12,11 +19,10 @@ export default class Model {
         object.endFill();
         object.buttonMode = true;
         object.interactive = true;
-        app.stage.addChild(object);
+        this.app.stage.addChild(object);
         object.on('pointerdown', controller.onDown);
         object.on('pointerup', controller.onUp);
         object.on('pointerover', controller.onOver);
         object.on('pointerout', controller.onOut);
     }
-
 }
