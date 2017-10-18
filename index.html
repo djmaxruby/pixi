@@ -43,15 +43,19 @@
 
     var controller = {
 
+        is_mouse_down: false,
+
         onDown: function () {
             this.beginFill(0x0000FF);
             this.drawRect(100,100,400,300);
             this.endFill();
+            this.is_mouse_down = true;
         },
         onUp: function () {
             this.beginFill(0x00FF00);
             this.drawRect(100,100,400,300);
             this.endFill();
+            this.is_mouse_down = false;
         },
         onOut: function () {
             this.beginFill(0xFF0000);
@@ -59,7 +63,10 @@
             this.endFill();
         },
         onOver: function () {
-            this.beginFill(0x00FF00);
+            if (this.is_mouse_down)
+                this.beginFill(0x0000FF);
+            else
+                this.beginFill(0x00FF00);
             this.drawRect(100,100,400,300);
             this.endFill();
         }
